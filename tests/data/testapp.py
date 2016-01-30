@@ -3,4 +3,4 @@
 
 from flask import Flask
 
-testapp = Flask(__name__)
+app = Flask(__name__)

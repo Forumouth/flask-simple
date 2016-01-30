@@ -3,12 +3,13 @@
 
 from .model import ExampleModel
 from .form import generate_example_form
-from .view import SimpleView
-from .testapp import testapp
+from .view import SimpleView, SimpleTemplateView
+from .testapp import app
 
 __all__ = [
     "ExampleModel",
     "generate_example_form",
     "SimpleView",
-    "testapp"
+    "SimpleTemplateView",
+    "app"
 ]
