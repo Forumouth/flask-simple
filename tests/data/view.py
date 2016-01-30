@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from src import FlaskEasyView
+from flask.ext.simple import FlaskEasyView
 
 from .model import ExampleModel
 from .form import generate_example_form

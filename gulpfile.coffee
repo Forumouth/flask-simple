@@ -6,11 +6,11 @@ q = require "q"
 g.task "test", ->
   shellCommands = [
     "echo 'Syntax Check'"
-    "flake8 src tests"
+    "flake8 flask_simple tests"
     "echo 'Code Metrics check'"
-    "radon cc -nc src tests"
+    "radon cc -nc flask_simple tests"
     "echo 'Maintenancibility check'"
-    "radon mi -nc src tests"
+    "radon mi -nc flask_simple tests"
     "nosetests --all tests"
   ]
   if not process.env.CI
@@ -40,6 +40,6 @@ g.task "test", ->
 
 g.task "default", ->
   g.watch [
-    "src/**/*.py",
+    "flask_simple/**/*.py",
     "tests/**/*.py"
   ], ["test"]

@@ -65,7 +65,7 @@ class SimpleReadTestWithTemplate(TestCase):
 
     def setUp(self):
         from .data import SimpleTemplateView
-        from src.mocks import render_template
+        from flask_simple.mocks import render_template
         app.testing = True
         self.client = app.test_client()
         self.view = SimpleTemplateView
