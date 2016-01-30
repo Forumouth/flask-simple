@@ -1,0 +1,5 @@
+flask
+flask-classy
+flake8
+nose
+radon
