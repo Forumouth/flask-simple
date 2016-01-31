@@ -2,7 +2,7 @@
 # coding=utf-8
 
 import json
-from flask import current_app, jsonify
+from flask import current_app, jsonify, request
 from flask.ext.classy import FlaskView
 
 
@@ -35,3 +35,16 @@ class FlaskEasyView(FlaskView):
     def get(self, pk):
         entity = self.model.objects(pk=pk).get()
         return self.__json_or_render__(entity)
+
+    def post(self):
+        model = None
+        if hasattr(self, "form"):
+            form = self.form(data=request.get_json())
+            form.validate()
+            model = self.model()
+            form.populate_obj(model)
+        else:
+            model = self.model(**request.get_json())
+            model.validate()
+        model.save()
+        return "", 200

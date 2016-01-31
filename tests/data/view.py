@@ -27,5 +27,16 @@ class SimpleTemplateView(SimpleView):
     list_name = "simple_templated"
 
 
+class WithoutFormView(FlaskEasyView):
+    '''
+    Simple Example View without form
+    '''
+    route_base = "/noform"
+    trailing_slash = False
+    model = ExampleModel
+    list_name = "simple_no_form"
+
+
 SimpleView.register(app)
 SimpleTemplateView.register(app)
+WithoutFormView.register(app)
