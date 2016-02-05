@@ -33,12 +33,10 @@ class ExampleModel(ExampleModelPrivate):
     model_entity = ExampleModelPrivate(name="Test", age=99, statecall=False)
     objects = MagicMock(return_value=model_entity)
     save = MagicMock()
-    validate = MagicMock()
 
     @classmethod
     def reset_mocks(cls):
         cls.objects.get.reset_mock()
         cls.objects.reset_mock()
         cls.save.reset_mock()
-        cls.validate.reset_mock()
         cls.model_entity.reset_mocks()

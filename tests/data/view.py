@@ -18,6 +18,16 @@ class SimpleView(FlaskEasyView):
     list_name = "simple"
 
 
+class SimpleValidationFailureView(SimpleView):
+    '''
+    Simple Example view, but failures validation
+    '''
+    route_base = "/invalid"
+    expected_err = {"error": ["Something happend"]}
+    form = generate_example_form(False, expected_err)
+    list_name = "simple_validation_failure"
+
+
 class SimpleTemplateView(SimpleView):
     '''
     Simple Example View with render_template
@@ -40,3 +50,4 @@ class WithoutFormView(FlaskEasyView):
 SimpleView.register(app)
 SimpleTemplateView.register(app)
 WithoutFormView.register(app)
+SimpleValidationFailureView.register(app)

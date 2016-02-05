@@ -2,8 +2,13 @@ g = require "gulp"
 notify = require "gulp-notify"
 exec = require("child_process").exec
 q = require "q"
-
 g.task "test", ->
+  nosetestsParams = [
+    "--with-coverage"
+    "--cover-erase"
+    "--cover-package=flask_simple"
+    "--all"
+  ]
   shellCommands = [
     "echo 'Syntax Check'"
     "flake8 flask_simple tests"
@@ -11,7 +16,7 @@ g.task "test", ->
     "radon cc -nc flask_simple tests"
     "echo 'Maintenancibility check'"
     "radon mi -nc flask_simple tests"
-    "nosetests --all tests"
+    "nosetests #{nosetestsParams.join " "} tests"
   ]
   if not process.env.CI
     shellCommands.splice 0, 0, ". ../bin/activate"

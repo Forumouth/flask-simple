@@ -3,7 +3,10 @@
 
 from .model import ExampleModel
 from .form import generate_example_form
-from .view import SimpleView, SimpleTemplateView, WithoutFormView
+from .view import (
+    SimpleView, SimpleTemplateView, WithoutFormView,
+    SimpleValidationFailureView
+)
 from .testapp import app
 
 __all__ = [
@@ -12,5 +15,6 @@ __all__ = [
     "SimpleView",
     "SimpleTemplateView",
     "WithoutFormView",
+    "SimpleValidationFailureView",
     "app"
 ]

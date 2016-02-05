@@ -38,7 +38,6 @@ class SimpleCreateValidTest(TestCase):
             self.assertFalse(resp.data)
         self.form.initialized.assert_called_with(data=data)
         assert self.form.validate.called
-        self.model.validate.assert_not_called()
         assert self.form.populate_obj.called
         self.assertIs(
             # I don't think this is good, if there is someone who
@@ -76,6 +75,41 @@ class CreationValidTestWithoutForm(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertFalse(resp.data)
         self.model.initialized.assert_called_once_with(**data)
-        # Instead, model.validate should be called
-        assert self.model.validate.called
         assert self.model.save.called
+
+
+class SimpleCreateInvalidTest(TestCase):
+    '''
+    Create test, and form validation is NOT valid.
+    '''
+    def setUp(self):
+        from .data import SimpleValidationFailureView
+        app.testing = True
+        self.client = app.test_client()
+        self.view = SimpleValidationFailureView
+        self.model = self.view.model
+        self.form = self.view.form
+
+    def tearDown(self):
+        self.model.reset_mocks()
+        self.form.reset_mocks()
+
+    def test_post(self):
+        data = {"test": "this is a test"}
+        with self.client as cli:
+            resp = cli.post(
+                self.view.route_base,
+                data=json.dumps(data),
+                headers={
+                    "Content-Type": "application/json"
+                },
+                follow_redirects=True
+            )
+            self.assertEqual(resp.status_code, 417)
+            self.assertEqual(resp.mimetype, "application/json")
+            self.assertDictEqual(
+                json.loads(resp.data.decode("utf-8")), self.view.expected_err
+            )
+        self.form.initialized.assert_called_with(data=data)
+        assert self.form.validate.called
+        self.model.save.assert_not_called()

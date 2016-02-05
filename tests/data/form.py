@@ -22,7 +22,7 @@ def generate_example_form(valid=True, errors=None):
             '''
             For args and kwargs, do nothing.
             '''
-            self.errors = None
+            self.errors = errors
             self.initialized(*args, **kwargs)
 
         @classmethod
