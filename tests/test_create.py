@@ -29,9 +29,7 @@ class SimpleCreateValidTest(TestCase):
             resp = cli.post(
                 "/simple",
                 data=json.dumps(data),
-                headers={
-                    "Content-Type": "application/json"
-                },
+                headers={"Content-Type": "application/json"},
                 follow_redirects=True
             )
             self.assertEqual(resp.status_code, 200)

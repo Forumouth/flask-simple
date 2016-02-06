@@ -36,8 +36,8 @@ class SimpleReadTest(TestCase):
                     self.model.model_entity.to_dict.return_value
                 )
             })
-        assert self.view.model.objects.called
-        assert self.view.model.model_entity.to_json.called
+        assert self.model.objects.called
+        assert self.model.model_entity.to_json.called
 
     def test_get(self):
         '''
@@ -52,8 +52,8 @@ class SimpleReadTest(TestCase):
                 self.model.model_entity.to_dict.return_value
             )
         self.view.model.objects.assert_called_once_with(pk="test")
-        assert self.view.model.objects.return_value.get.called
-        assert self.view.model.model_entity.to_json.called
+        assert self.model.objects.return_value.get.called
+        assert self.model.model_entity.to_json.called
 
 
 class SimpleReadTestWithTemplate(TestCase):

@@ -9,6 +9,8 @@ from .view import (
 )
 from .testapp import app
 
+sample_oid = "56b5baab63cbbfb5dece4cbd"
+
 __all__ = [
     "ExampleModel",
     "generate_example_form",
@@ -16,5 +18,6 @@ __all__ = [
     "SimpleTemplateView",
     "WithoutFormView",
     "SimpleValidationFailureView",
+    "sample_oid",
     "app"
 ]

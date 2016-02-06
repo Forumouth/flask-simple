@@ -28,5 +28,7 @@ def generate_example_form(valid=True, errors=None):
         @classmethod
         def reset_mocks(cls):
             cls.validate.reset_mock()
+            cls.initialized.reset_mock()
+            cls.populate_obj.reset_mock()
 
     return ExampleForm

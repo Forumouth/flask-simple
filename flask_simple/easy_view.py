@@ -48,3 +48,20 @@ class FlaskEasyView(FlaskView):
             model = self.model(**request.get_json())
         model.save()
         return "", 200
+
+    def __update(self, _id):
+        form = self.form(request.get_json())
+        form.validate()
+
+        model = self.model.objects(pk=_id).get()
+        form.populate_obj(model)
+        model.save()
+        return model
+
+    def put(self, _id):
+        self.__update(_id)
+        return "", 200
+
+    def patch(self, _id):
+        updated_model = self.__update(_id)
+        return jsonify(json.loads(updated_model.to_json()))
